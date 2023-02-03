@@ -5,33 +5,50 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class TestController {
 
     @PostMapping("/solution")
     public Challenge solution(@RequestBody Challenge challenge) {
-        long temp = challenge.value;
 
-        while(!checkIfPalindrome(temp)) {
-            temp++;
-        }
+        final List<Integer> solves = new ArrayList<>();
 
-        return new Challenge(temp);
-    }
+        int counter = 1;
 
-    private boolean checkIfPalindrome(long candidate) {
-        final String s = String.valueOf(candidate);
-        final int index = s.length() / 2;
-
-        int counter = 0;
-        while (counter < index) {
-            if (s.charAt(counter) != s.charAt(s.length() - 1 - counter)) {
-                return false;
-            }
+        while (solves.size() < 4) {
+            solves.add(fib(counter));
             counter++;
         }
 
-        return true;
+        while (getSumOfSolves(solves) != challenge.value) {
+            solves.remove(0);
+            solves.add(fib(counter));
+            counter++;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Integer i : solves)
+            stringBuilder.append(i);
+        return new Challenge(Long.parseLong(stringBuilder.toString()));
+    }
+
+
+    private Integer getSumOfSolves(List<Integer> solves) {
+        int sum = 0;
+        for (Integer i : solves)
+            sum += i;
+        return sum;
+    }
+
+    int fib(int n)
+    {
+        if (n <= 1)
+            return n;
+        return fib(n - 1) + fib(n - 2);
     }
 
     record Challenge(long value) { }
