@@ -21,7 +21,7 @@ public class TestController {
 
     private boolean checkIfPalindrome(long candidate) {
         final String s = String.valueOf(candidate);
-        final int index = (s.length() % 2 == 0) ? s.length() / 2 : s.length() / 2 - 1;
+        final int index = s.length() / 2;
 
         int counter = 0;
         while (counter < index) {
