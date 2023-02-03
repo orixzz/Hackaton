@@ -23,7 +23,18 @@ public class TestController {
     }
 
     private boolean checkIfPalindrome(long candidate) {
-        return false;
+        final String s = String.valueOf(candidate);
+        final int index = (s.length() % 2 == 0) ? s.length() / 2 : s.length() / 2 - 1;
+
+        int counter = 0;
+        while (counter < index) {
+            if (s.charAt(counter) != s.charAt(s.length() - 1 - counter)) {
+                return false;
+            }
+            counter++;
+        }
+
+        return true;
     }
 
     record Challenge(long value) {
