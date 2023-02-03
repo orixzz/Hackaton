@@ -1,12 +1,9 @@
 package be.one16.testsolution.solution;
 
 
-import jdk.jshell.spi.ExecutionControl;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException;
 
 @RestController
 public class TestController {
