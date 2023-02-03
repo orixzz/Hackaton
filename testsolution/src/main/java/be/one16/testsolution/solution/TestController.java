@@ -18,8 +18,15 @@ public class TestController {
     @PostMapping("/solution")
     public Challenge solution(@RequestBody Challenge challenge) {
         long temp = challenge.value;
-        
-        return new Challenge(temp);
+
+        while(true) {
+            final boolean check = checkIfPalindrome(temp);
+            if (check) {
+                return new Challenge(temp);
+            } else {
+                temp++;
+            }
+        }
     }
 
     private boolean checkIfPalindrome(long candidate) {
@@ -37,7 +44,6 @@ public class TestController {
         return true;
     }
 
-    record Challenge(long value) {
-    }
+    record Challenge(long value) { }
 
 }
