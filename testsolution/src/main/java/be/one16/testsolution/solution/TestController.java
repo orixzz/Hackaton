@@ -9,31 +9,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @PostMapping("/solution")
-    public Challenge solution(@RequestBody Challenge challenge) {
-        long temp = challenge.value;
+    public Result solution(@RequestBody Challenge challenge) {
+        String binary = Integer.toBinaryString(challenge.code);
+        final String message = challenge.message;
+        StringBuilder response = new StringBuilder();
 
-        while(!checkIfPalindrome(temp)) {
-            temp++;
+        while (binary.length() < message.length()) {
+            binary = "0" + binary;
         }
 
-        return new Challenge(temp);
-    }
-
-    private boolean checkIfPalindrome(long candidate) {
-        final String s = String.valueOf(candidate);
-        final int index = s.length() / 2;
-
-        int counter = 0;
-        while (counter < index) {
-            if (s.charAt(counter) != s.charAt(s.length() - 1 - counter)) {
-                return false;
+        for (int i = 0; i <= message.length() - 1; i++) {
+            if (binary.charAt(i) == '1') {
+                final char c = message.charAt(i);
+                response.append(c);
             }
-            counter++;
         }
 
-        return true;
+        return new Result(response.toString());
     }
 
-    record Challenge(long value) { }
+
+    record Challenge(String message, Integer code) {
+    }
+
+    record Result(String decoded) {
+    }
 
 }

@@ -45,9 +45,9 @@
                                 <image>openjdk:20-slim-buster</image>
                             </from>
                             <to>
-                                <image>crtechday20230203.azurecr.io/${project.artifactId}</image>
+                                <image>crtechdayteam1prd.azurecr.io/${project.artifactId}</image>
                                 <tags>
-                                    <tag>${tag}</tag>
+                                    <tag>4</tag>
                                 </tags>
                             </to>
                             <container>
