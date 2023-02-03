@@ -8,22 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-
-    private String result;
-
-
     @PostMapping("/solution")
     public Challenge solution(@RequestBody Challenge challenge) {
         long temp = challenge.value;
 
-        while(true) {
-            final boolean check = checkIfPalindrome(temp);
-            if (check) {
-                return new Challenge(temp);
-            } else {
-                temp++;
-            }
+        while(!checkIfPalindrome(temp)) {
+            temp++;
         }
+
+        return new Challenge(temp);
     }
 
     private boolean checkIfPalindrome(long candidate) {
